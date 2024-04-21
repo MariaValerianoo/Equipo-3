@@ -28,7 +28,7 @@ class TioBorracho{
             destinosGenerales.insert(destino);
             auto iteDestino = destinosGenerales.find(destino);
             
-            if (iteDestino!=destinosGenerales.end())
+            if (destinosGenerales.size() != 0 && iteDestino==destinosGenerales.end())
             {
                 cout << "El destino ingresado ya esta registrado" << endl;
                 destinosGenerales.erase(destino);
@@ -56,12 +56,12 @@ class TioBorracho{
                   
         while(true){
             
-            if (!fechaValida(dia, mes, anio) || !fechaValida(dia1, mes1, anio1)){
+            if (fechaValida(dia, mes, anio) == true && fechaValida(dia1, mes1, anio1) == true){
 
                 fecha = to_string(dia) + "/" + to_string(mes) + "/" + to_string(anio);
                 fecha1 = to_string(dia1) + "/" + to_string(mes1) + "/" + to_string(anio1);
 
-                fechasGenerales.insert(fecha, fecha1);
+                fechasGenerales.insert(pair<string, string>(fecha, fecha1));
                 auto iteFecha = fechasGenerales.find(fecha);
                 auto iteFecha1 = fechasGenerales.find(fecha1);
                 
@@ -79,6 +79,7 @@ class TioBorracho{
             else{
 
                 cout << "Fecha no valida, ingrese nuevamente" << endl;
+                break;
 
             }
         } 
@@ -135,3 +136,14 @@ class TioBorracho{
 
 
 };
+
+int main(){
+    
+    TioBorracho tio;
+    
+    tio.anadirDestinos();
+    tio.anadirFechas();
+    tio.mostrarDestinos();
+    
+    return 0;
+}
