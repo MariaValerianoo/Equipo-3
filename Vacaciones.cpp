@@ -19,24 +19,28 @@ class TioBorracho{
     
         string destino;
             
-        cout << "Ingrese el destino del viaje: " << endl;
-        cin >> destino;
-        
-        
-        while(true){
+         while(true){
+            cout << "Ingrese el destino del viaje (0. para salir): " << endl;
+            cin >> destino;
             
             destinosGenerales.insert(destino);
             auto iteDestino = destinosGenerales.find(destino);
             
-            if (destinosGenerales.size() != 0 && iteDestino==destinosGenerales.end())
-            {
+            if (destinosGenerales.size() != 0 && iteDestino==destinosGenerales.end()){
+
                 cout << "El destino ingresado ya esta registrado" << endl;
                 destinosGenerales.erase(destino);
                 
-            }else{
+            }
+            else if (destino == "0"){
+
+                cout << "Saliendo..." << endl;
+                break;
+            }
+            else{
                 
                 cout << "Destino registrado" << endl;
-                break;
+                
             }
             
         }
@@ -48,14 +52,16 @@ class TioBorracho{
         string fecha, fecha1;
         int dia, mes, anio;
 
-        cout << "Ingrese fecha de inicio (DD/MM/AAAA): " << endl;
-        cin >> dia >> mes >> anio;
-
-        cout << "Ingrese fecha de fin (DD/MM/AAAA): " << endl;
-        cin >> dia1 >> mes1 >> anio1;
+        
                   
         while(true){
             
+            cout << "Ingrese fecha de inicio (DD/MM/AAAA): " << endl;
+            cin >> dia >> mes >> anio;
+
+            cout << "Ingrese fecha de fin (DD/MM/AAAA): " << endl;
+            cin >> dia1 >> mes1 >> anio1;
+
             if (fechaValida(dia, mes, anio) == true && fechaValida(dia1, mes1, anio1) == true){
 
                 fecha = to_string(dia) + "/" + to_string(mes) + "/" + to_string(anio);
@@ -73,8 +79,14 @@ class TioBorracho{
                 }else{
                     
                     cout << "Fechas registradas" << endl;
-                    break;
+                   
                 }
+            }
+            else if((dia == 0 && mes == 0 && anio == 0) || (dia1 == 0 && mes1 == 0 && anio1 == 0)){
+                
+                cout << "Saliendo..." << endl;
+                break;
+                
             }
             else{
 
@@ -141,9 +153,39 @@ int main(){
     
     TioBorracho tio;
     
-    tio.anadirDestinos();
-    tio.anadirFechas();
-    tio.mostrarDestinos();
+    while (true){
+        
+        int opcion;
+        
+        cout << "1. Anadir destino" << endl;
+        cout << "2. Anadir fechas" << endl;
+        cout << "3. Mostrar destinos" << endl;
+        cout << "4. Salir" << endl;
+        
+        cout << "Ingrese una opcion: " << endl;
+        cin >> opcion;
+        
+        if (opcion == 1)
+        {
+            tio.anadirDestinos();
+        }
+        
+        if (opcion == 2)
+        {
+            tio.anadirFechas();
+        }
+        
+        if (opcion == 3)
+        {
+            tio.mostrarDestinos();
+        }
+        
+        if (opcion == 4)
+        {
+            break;
+        }
+    
+    }
     
     return 0;
 }
