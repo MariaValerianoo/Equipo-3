@@ -10,6 +10,8 @@ class TioBorracho{
   
         set <string> destinosGenerales;
         map <string, string> fechasGenerales;
+        
+        int dia1, mes1, anio1;
     
     public:
     
@@ -42,10 +44,9 @@ class TioBorracho{
     }
     
     void anadirFechas(){
-        
+
         string fecha, fecha1;
         int dia, mes, anio;
-        int dia1, mes1, anio1;
 
         cout << "Ingrese fecha de inicio (DD/MM/AAAA): " << endl;
         cin >> dia >> mes >> anio;
@@ -62,8 +63,9 @@ class TioBorracho{
 
                 fechasGenerales.insert(fecha, fecha1);
                 auto iteFecha = fechasGenerales.find(fecha);
+                auto iteFecha1 = fechasGenerales.find(fecha1);
                 
-                if (iteFecha!= fechasGenerales.end())
+                if (iteFecha!= fechasGenerales.end() && iteFecha1!= fechasGenerales.end())
                 {
                     cout << "La fecha ingresado ya esta registrado" << endl;
                     fechasGenerales.erase(fecha);
@@ -81,6 +83,33 @@ class TioBorracho{
             }
         } 
         
+        
+    }
+
+    bool fechaDisponible(int dia, int mes, int anio){
+
+
+        if(dia > dia1 || mes > mes1 || anio > anio1){
+
+            return true;
+
+        }
+        else{
+
+            cout << "En esta fecha no hay disponibilidad de viaje" << endl;
+            return false;
+
+        }
+
+    }
+    
+    
+    void mostrarDestinos(){
+        
+        for(auto iteDestino = destinosGenerales.begin(); iteDestino != destinosGenerales.end(); iteDestino++){
+            
+            cout << *iteDestino << endl;
+        }
         
     }
 
@@ -103,25 +132,6 @@ class TioBorracho{
         
         return true;
     }
-
-    void fechaDisponible(){
-
-
-
-
-        
-    }
-    
-    
-    void mostrarDestinos(){
-        
-        for(auto iteDestino = destinosGenerales.begin(); iteDestino != destinosGenerales.end(); iteDestino++){
-            
-            cout << *iteDestino << endl;
-        }
-        
-    }
-
 
 
 };
