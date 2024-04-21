@@ -17,9 +17,8 @@ class TioBorracho{
     
         string destino;
             
-        cout << "ingrese: " << endl;
+        cout << "Ingrese el destino del viaje: " << endl;
         cin >> destino;
-        
         
         
         while(true){
@@ -34,13 +33,11 @@ class TioBorracho{
                 
             }else{
                 
-                cout << "destino registrado" << endl;
-                
+                cout << "Destino registrado" << endl;
+                break;
             }
             
         }
-        
-        
         
     }
     
@@ -50,10 +47,10 @@ class TioBorracho{
         int dia, mes, anio;
         int dia1, mes1, anio1;
 
-        cout << "ingrese fecha de inicio (DD/MM/AAAA): " << endl;
+        cout << "Ingrese fecha de inicio (DD/MM/AAAA): " << endl;
         cin >> dia >> mes >> anio;
 
-        cout << "ingrese fecha de fin (DD/MM/AAAA): " << endl;
+        cout << "Ingrese fecha de fin (DD/MM/AAAA): " << endl;
         cin >> dia1 >> mes1 >> anio1;
         
         fecha = to_string(dia) + "/" + to_string(mes) + "/" + to_string(anio);
@@ -72,13 +69,24 @@ class TioBorracho{
                 
             }else{
                 
-                cout << "fechas registrado" << endl;
-                
+                cout << "Fechas registradas" << endl;
+                break;
             }
             
         }
         
         
     }
+
+    void mostrarDestinos(){
+        
+        for(auto iteDestino = destinosGenerales.begin(); iteDestino != destinosGenerales.end(); iteDestino++){
+            
+            cout << *iteDestino << endl;
+        }
+        
+    }
     
+
+
 };
