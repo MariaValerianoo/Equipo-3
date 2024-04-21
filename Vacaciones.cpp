@@ -9,7 +9,7 @@ class TioBorracho{
     private:
   
         set <string> destinosGenerales;
-        set <string> fechasGenerales;
+        map <string, string> fechasGenerales;
     
     public:
     
@@ -46,19 +46,23 @@ class TioBorracho{
     
     void anadirFechas(){
         
-        string fecha;
+        string fecha, fecha1;
         int dia, mes, anio;
-            
-        cout << "ingrese dia /mes / año " << endl;
+        int dia1, mes1, anio1;
+
+        cout << "ingrese fecha de inicio (DD/MM/AAAA): " << endl;
         cin >> dia >> mes >> anio;
-        
+
+        cout << "ingrese fecha de fin (DD/MM/AAAA): " << endl;
+        cin >> dia1 >> mes1 >> anio1;
         
         fecha = to_string(dia) + "/" + to_string(mes) + "/" + to_string(anio);
+        fecha1 = to_string(dia1) + "/" + to_string(mes1) + "/" + to_string(anio1);
         // es mejor un mapa para guardar inicio y fin del destino
         
         while(true){
             
-            fechasGenerales.insert(fecha);
+            fechasGenerales.insert(fecha, fecha1);
             auto iteFecha = fechasGenerales.find(fecha);
             
             if (iteFecha!= fechasGenerales.end())
@@ -73,6 +77,7 @@ class TioBorracho{
             }
             
         }
+        
         
     }
     
