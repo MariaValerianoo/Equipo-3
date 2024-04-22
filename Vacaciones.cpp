@@ -9,6 +9,7 @@ class TioBorracho{
     public:
   
         set <string> destinosGenerales;
+        set <string> destinoPersona;
         map <string, string> fechasGenerales;
 
         int dia1, mes1, anio1;
@@ -17,6 +18,9 @@ class TioBorracho{
     
     set <string> getDestinosGenerales(){
         return destinosGenerales;
+    }
+    set <string> getDestinoPersona(){
+        return destinoPersona;
     }
 
     void anadirDestinos(){
@@ -38,6 +42,7 @@ class TioBorracho{
             }
             else{
                 
+                destinoPersona.insert(destino);
                 cout << "Destino registrado" << endl;
                 break;
             }
