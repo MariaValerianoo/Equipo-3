@@ -1,0 +1,35 @@
+# Archivos de construcción y ejecutables
+/build/
+/bin/
+/*.exe
+/*.out
+
+# Archivos de objetos e intermedios
+*.o
+*.obj
+
+# Archivos de dependencias
+*.d
+
+# Archivos generados por IDEs y editores
+/.vscode/
+/.idea/
+*.suo
+*.user
+*.sdf
+*.opensdf
+*.sln.docstates
+
+# Archivos de respaldo y temporales
+*~
+*.bak
+*.swp
+
+# Archivos de caché
+*.cache
+
+# Archivos de configuración de compiladores específicos
+/cmake-build-*/
+
+# Archivos de registro
+*.log
