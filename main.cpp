@@ -142,44 +142,44 @@ public:
         this->fecha_devuelta = fecha_devuelta;
     }
 
-    //     vector<Actividades> getActividades()
-    //     {
-    //         return actividades;
-    //     }
+    vector<Actividades> getActividades()
+    {
+        return actividades;
+    }
 
-    //     void agregaractividad(Actividades &actividad)
-    //     {
-    //         actividades.push_back(actividad);
-    //     }
+    void agregaractividad(const Actividades &actividad)
+    {
+        actividades.push_back(actividad);
+    }
 
-    //     void Crear_actividad(string miembro_familiar, map<string, Viaje> &asignaciones_familia)
-    //     {
-    //         string nombre_actividad;
-    //         string hora_actividad;
-    //         string lugar_actividad;
-    //         string describ_actividad;
+    void Crear_actividad(string miembro_familiar, map<string, Viaje> &asignaciones_familia)
+    {
+        string nombre_actividad;
+        string hora_actividad;
+        string lugar_actividad;
+        string describ_actividad;
 
-    //         cout << "Ingrese el nombre de la actividad: " << endl;
-    //         cin >> nombre_actividad;
+        cout << "Ingrese el nombre de la actividad: " << endl;
+        cin >> nombre_actividad;
 
-    //         cout << "Ingrese la hora de la actividad: " << endl;
-    //         cin >> hora_actividad;
+        cout << "Ingrese la hora de la actividad: " << endl;
+        cin >> hora_actividad;
 
-    //         cout << "Ingrese el lugar de la actividad: " << endl;
-    //         cin >> lugar_actividad;
+        cout << "Ingrese el lugar de la actividad: " << endl;
+        cin >> lugar_actividad;
 
-    //         cout << "Ingrese la descripcion de la actividad: " << endl;
-    //         cin >> describ_actividad;
+        cout << "Ingrese la descripcion de la actividad: " << endl;
+        cin >> describ_actividad;
 
-    //         auto iterador = asignaciones_familia.find(miembro_familiar);
-    //         if (iterador == asignaciones_familia.end())
-    //         {
-    //             cout << "no hay viajes asignados para este familiar: " << endl;
-    //             return;
-    //         }
+        auto iterador = asignaciones_familia.find(miembro_familiar);
+        if (iterador == asignaciones_familia.end())
+        {
+            cout << "no hay viajes asignados para este familiar: " << endl;
+            return;
+        }
 
-    //         iterador.second.agregaractividad(Actividades(nombre_actividad, hora_actividad, lugar_actividad, describ_actividad));
-    //     }
+        iterador->second.agregaractividad(Actividades(nombre_actividad, hora_actividad, lugar_actividad, describ_actividad));
+    }
 };
 
 class Planeacion_viaje
@@ -394,13 +394,13 @@ public:
 
                 destino_especifico(destino_bucar, asignaciones_familia);
                 break;
-                // case 6:
-                //     cout << "Ingresar el familiar: " << endl;
-                //     cin >> miembro_familia;
-                //     actividad.Crear_actividad(miembro_familia, asignaciones_familia);
-                //     break;
-
             case 6:
+                cout << "Ingresar el familiar: " << endl;
+                cin >> miembro_familia;
+                actividad.Crear_actividad(miembro_familia, asignaciones_familia);
+                break;
+
+            case 7:
                 cout << "Gracias por usar el sistema" << endl;
                 break;
 
