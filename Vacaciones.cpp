@@ -6,15 +6,19 @@ using namespace std;
 
 class TioBorracho{
     
-    private:
+    public:
   
         set <string> destinosGenerales;
         map <string, string> fechasGenerales;
-        
+
         int dia1, mes1, anio1;
     
     public:
     
+    set <string> getDestinosGenerales(){
+        return destinosGenerales;
+    }
+
     void anadirDestinos(){
     
         string destino;
@@ -32,15 +36,10 @@ class TioBorracho{
                 destinosGenerales.erase(destino);
                 
             }
-            else if (destino == "0"){
-
-                cout << "Saliendo..." << endl;
-                break;
-            }
             else{
                 
                 cout << "Destino registrado" << endl;
-                
+                break;
             }
             
         }
@@ -50,9 +49,7 @@ class TioBorracho{
     void anadirFechas(){
 
         string fecha, fecha1;
-        int dia, mes, anio;
-
-        
+        int dia, mes, anio;       
                   
         while(true){
             
@@ -78,42 +75,24 @@ class TioBorracho{
                     
                 }else{
                     
-                    cout << "Fechas registradas" << endl;
-                   
+                    if(dia <= dia1 && mes <= mes1 && anio <= anio1){
+                        cout << "Fechas registradas" << endl;
+                        break;
+                    }
+                    else{
+                        cout << "Fecha de inicio no puede ser mayor a la fecha de fin" << endl;
+                    }
                 }
-            }
-            else if((dia == 0 && mes == 0 && anio == 0) || (dia1 == 0 && mes1 == 0 && anio1 == 0)){
-                
-                cout << "Saliendo..." << endl;
-                break;
                 
             }
             else{
 
                 cout << "Fecha no valida, ingrese nuevamente" << endl;
-                break;
 
             }
         } 
         
         
-    }
-
-    bool fechaDisponible(int dia, int mes, int anio){
-
-
-        if(dia > dia1 || mes > mes1 || anio > anio1){
-
-            return true;
-
-        }
-        else{
-
-            cout << "En esta fecha no hay disponibilidad de viaje" << endl;
-            return false;
-
-        }
-
     }
     
     
@@ -149,43 +128,3 @@ class TioBorracho{
 
 };
 
-int main(){
-    
-    TioBorracho tio;
-    
-    while (true){
-        
-        int opcion;
-        
-        cout << "1. Anadir destino" << endl;
-        cout << "2. Anadir fechas" << endl;
-        cout << "3. Mostrar destinos" << endl;
-        cout << "4. Salir" << endl;
-        
-        cout << "Ingrese una opcion: " << endl;
-        cin >> opcion;
-        
-        if (opcion == 1)
-        {
-            tio.anadirDestinos();
-        }
-        
-        if (opcion == 2)
-        {
-            tio.anadirFechas();
-        }
-        
-        if (opcion == 3)
-        {
-            tio.mostrarDestinos();
-        }
-        
-        if (opcion == 4)
-        {
-            break;
-        }
-    
-    }
-    
-    return 0;
-}
