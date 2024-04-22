@@ -151,30 +151,35 @@ public:
     {
         actividades.push_back(actividad);
     }
-    // crea una actividad
-    // void Crear_actividad(vector<Actividades> agenda, map<string, Viaje> &asignaciones_familia)
-    // {
-    //     string nombre_actividad;
-    //     string hora_actividad;
-    //     string lugar_actividad;
-    //     string describ_actividad;
 
-    //     cout << "Ingrese el nombre de la actividad: " << endl;
-    //     cin >> nombre_actividad;
+    void Crear_actividad(string miembro_familiar, map<string, Viaje> &asignaciones_familia)
+    {
+        string nombre_actividad;
+        string hora_actividad;
+        string lugar_actividad;
+        string describ_actividad;
 
-    //     cout << "Ingrese la hora de la actividad: " << endl;
-    //     cin >> hora_actividad;
+        cout << "Ingrese el nombre de la actividad: " << endl;
+        cin >> nombre_actividad;
 
-    //     cout << "Ingrese el lugar de la actividad: " << endl;
-    //     cin >> lugar_actividad;
+        cout << "Ingrese la hora de la actividad: " << endl;
+        cin >> hora_actividad;
 
-    //     cout << "Ingrese la descripcion de la actividad: " << endl;
-    //     cin >> describ_actividad;
+        cout << "Ingrese el lugar de la actividad: " << endl;
+        cin >> lugar_actividad;
 
-    //     iterador.second.agregar_actividad(Actividades(nombre_actividad, hora_actividad, lugar_actividad, describ_actividad));
-    // }
+        cout << "Ingrese la descripcion de la actividad: " << endl;
+        cin >> describ_actividad;
 
-    // void Mostrar_actividad() {}
+        auto iterador = asignaciones_familia.find(miembro_familiar);
+        if (iterador == asignaciones_familia.end())
+        {
+            cout << "no hay viajes asignados para este familiar: " << endl;
+            return;
+        }
+
+        iterador.second.agregaractividad(Actividades(nombre_actividad, hora_actividad, lugar_actividad, describ_actividad));
+    }
 };
 
 class Planeacion_viaje
@@ -226,30 +231,30 @@ public:
     }
 };
 
-void Actividad(string miembro_familiar, map<string, Viaje> &asignaciones_familia)
-{
-    string nombre_actividad;
-    string hora_actividad;
-    string lugar_actividad;
-    // string descrip_actividad;
+// void Actividad(string miembro_familiar, map<string, Viaje> &asignaciones_familia)
+// {
+//     string nombre_actividad;
+//     string hora_actividad;
+//     string lugar_actividad;
+//     // string descrip_actividad;
 
-    cout << "Ingrese el nombtre de la actividad: " << endl;
-    cout << nombre_actividad;
-    cout << "Ingrese la hora de la actividad: " << endl;
-    cout << hora_actividad;
-    cout << "Ingrese el lugar de la actividad: " << endl;
-    cout << lugar_actividad;
+//     cout << "Ingrese el nombtre de la actividad: " << endl;
+//     cout << nombre_actividad;
+//     cout << "Ingrese la hora de la actividad: " << endl;
+//     cout << hora_actividad;
+//     cout << "Ingrese el lugar de la actividad: " << endl;
+//     cout << lugar_actividad;
 
-    auto iterador = asignaciones_familia.find(miembro_familiar);
-    if (iterador != asignaciones_familia.end())
-    {
-        cout << "Ano hay viajes asignados para este familiar: " << endl;
-        return;
-    }
+//     auto iterador = asignaciones_familia.find(miembro_familiar);
+//     if (iterador != asignaciones_familia.end())
+//     {
+//         cout << "Ano hay viajes asignados para este familiar: " << endl;
+//         return;
+//     }
 
-    iterador.second.agregaractividad(Actividades(nombre_actividad, hora_actividad, lugar_actividad));
-    cout << "Actividad agregada con éxito al viaje del familiar " << miembro_familiar;
-}
+//     iterador.second.agregaractividad(Actividades(nombre_actividad, hora_actividad, lugar_actividad));
+//     cout << "Actividad agregada con éxito al viaje del familiar " << miembro_familiar;
+// }
 
 void Consultar_Destino(string miembro, map<string, Viaje> &asignaciones_familia)
 {
@@ -292,12 +297,13 @@ class Interfaz
 private:
     Destino destino;
     Planeacion_viaje planeacion_viaje;
+    Viaje actividad;
     string nombre;
     string miembro_familia;
     string destino_llegada;
     string fecha_llegada;
     string fecha_salida;
-    Planeacion_viaje actividad;
+    // Planeacion_viaje actividad;
     string destino_bucar;
     set<Destino> destinos;
     map<string, Viaje> asignaciones_familia;
@@ -391,7 +397,7 @@ public:
             case 6:
                 cout << "Ingresar el familiar: " << endl;
                 cin >> miembro_familia;
-                Actividad(miembro_familia, asignaciones_familia);
+                actividad.Crear_actividad(miembro_familia, asignaciones_familia);
                 break;
 
             case 7:
