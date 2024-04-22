@@ -9,8 +9,9 @@ class TioBorracho{
     public:
   
         set <string> destinosGenerales;
-        set <string> destinoPersona;
         map <string, string> fechasGenerales;
+        map <string, set<string>> miembrosDestinos;
+        string miembro;
 
         int dia1, mes1, anio1;
     
@@ -19,15 +20,15 @@ class TioBorracho{
     set <string> getDestinosGenerales(){
         return destinosGenerales;
     }
-    set <string> getDestinoPersona(){
-        return destinoPersona;
-    }
-
+    
     void anadirDestinos(){
     
         string destino;
             
          while(true){
+
+            cout << "Ingrese el nombre del miembro: " << endl;
+            cin >> miembro;
             cout << "Ingrese el destino del viaje (0. para salir): " << endl;
             cin >> destino;
             
@@ -40,9 +41,12 @@ class TioBorracho{
                 destinosGenerales.erase(destino);
                 
             }
+            else if(destino == "0"){
+                break;
+            }
             else{
                 
-                destinoPersona.insert(destino);
+                miembrosDestinos[miembro].insert(destino);
                 cout << "Destino registrado" << endl;
                 break;
             }
@@ -51,7 +55,7 @@ class TioBorracho{
         
     }
     
-    void anadirFechas(){
+     void anadirFechas(){
 
         string fecha, fecha1;
         int dia, mes, anio;       
@@ -73,7 +77,7 @@ class TioBorracho{
                 auto iteFecha = fechasGenerales.find(fecha);
                 auto iteFecha1 = fechasGenerales.find(fecha1);
                 
-                if (iteFecha!= fechasGenerales.end() && iteFecha1!= fechasGenerales.end())
+                if (iteFecha == fechasGenerales.end() && iteFecha1 == fechasGenerales.end())
                 {
                     cout << "La fecha ingresado ya esta registrado" << endl;
                     fechasGenerales.erase(fecha);
@@ -100,12 +104,12 @@ class TioBorracho{
         
     }
     
-    
     void mostrarDestinos(){
         
         for(auto iteDestino = destinosGenerales.begin(); iteDestino != destinosGenerales.end(); iteDestino++){
             
             cout << *iteDestino << endl;
+
         }
         
     }
@@ -130,6 +134,21 @@ class TioBorracho{
         return true;
     }
 
+    void mostrarViajes(){
 
+        for(const auto& iteDestino:destinosGenerales){
+            
+            for(const auto& iteFecha:fechasGenerales){
+                
+                cout << "Destino: " << iteDestino << endl;
+                cout << "Fecha de inicio: " << iteFecha.first << endl;
+                cout << "Fecha de fin: " << iteFecha.second << endl;
+            }
+
+        }
+
+    }
+
+    
 };
 

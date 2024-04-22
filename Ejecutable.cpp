@@ -9,56 +9,28 @@ using namespace std;
 int main(){
     
     TioBorracho tio;
-    TioBorracho persona;
-    TioBorracho persona1;
-    TioBorracho persona2;
+    int opcion;
     
-    int opcion, familiar;
-    cout <<"Ingrese el familiar que desea registrar: " << endl;
-    cin >> familiar;
-    
-    switch (familiar)
+    while (true)
     {
-        case 1:
-            
-            cout << "Bienvenido" << endl;
-            
+        cout << "Bienvenido familiar :" << endl;
+        cout << "1. para registrar destinos \n 2. para ver destinos " << endl << "0.para salir";
+        cin >> opcion;
+        if(opcion == 1){
             tio.anadirDestinos();
             tio.anadirFechas();
-        
+        }
+        else if(opcion == 2 && tio.miembrosDestinos.size() != 0){
+
+            tio.mostrarViajes();
+        }
+        else if(opcion == 0){
             break;
-        
-        case 2:
-
-            cout << "Bienvenido" << endl;
-            persona.anadirDestinos();
-            persona.anadirFechas();
-            
-            break;
-
-        case 3:
-
-            cout << "Bienvenido" << endl;
-            persona1.anadirDestinos();
-            persona1.anadirFechas();
-            
-            break;
-
-        case 4:
-            
-            cout << "Bienvenido" << endl;
-            persona2.anadirDestinos();
-            persona2.anadirFechas();
-            
-            break;
-
-        default:
-
-            cout << "Familiar no encontrado" << endl;
-            break;
+        }
+        else{
+            cout << "Ingrese una opcion valida" << endl;
+        }
     }
-
-    
 
     return 0;
 }
