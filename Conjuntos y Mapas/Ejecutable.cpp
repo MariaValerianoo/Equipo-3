@@ -4,7 +4,7 @@ using namespace std;
 
 // Función para mostrar el menú de opciones
 void mostrarMenu() {
-    cout << "¡Bienvenido al sistema de gestión de vacaciones de la familia!" << endl;
+    cout << "¡Bienvenido al sistema de gestion de vacaciones de la familia!" << endl;
     cout << "1. Agregar destino a la lista general" << endl;
     cout << "2. Planificar viaje para un miembro de la familia" << endl;
     cout << "3. Consultar destinos planificados para un miembro de la familia" << endl;
@@ -29,11 +29,11 @@ int main() {
             case 1:
                 // Agregar destino a la lista general
                 cout << "Ingrese el nombre del destino: ";
-                cin >> nombre;
+                cin>>nombre;
                 cout << "Ingrese la fecha del destino: ";
-                cin >> fecha;
+                getline(cin, fecha);
                 cout << "Ingrese el itinerario del destino: ";
-                cin >> destinoNombre;
+                getline(cin, destinoNombre);
                 gestion.agregarDestino(nombre, fecha, destinoNombre);
                 break;
             case 2:
@@ -44,6 +44,7 @@ int main() {
                 cin >> destinoNombre;
                 cout << "Ingrese la fecha del viaje: ";
                 cin >> fecha;
+                cin.ignore();
                 gestion.planificarViaje(new MiembroFamilia(nombre), destinoNombre, fecha);
                 break;
             case 3:
@@ -64,7 +65,7 @@ int main() {
                 return 0;
             default:
                 // Opción inválida
-                cout << "Opción inválida. Por favor, ingrese un número válido." << endl;
+                cout << "Opcion invalida. Por favor, ingrese un numero valido." << endl;
                 break;
         }
     }
