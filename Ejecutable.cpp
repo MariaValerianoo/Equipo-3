@@ -15,14 +15,14 @@ int main(){
     while (true)
     {
         cout << "Bienvenido familiar :" << endl;
-        cout << "1. para registrar destinos \n 2. para ver destinos " << endl << "0.para salir";
+        cout << "1. para registrar destinos \n2. para ver destinos " << endl << "0.para salir" << endl;
         cin >> opcion;
         
         if(opcion == 1){
             tio.anadirDestinos();
         }
         else if(opcion == 2){
-            cout << "1. Ver destinos generales \n 2. Ver destinos por miembro \n 3. Ver viajes por fecha" << endl;
+            cout << "1. Ver destinos generales \n2. Ver destinos por miembro \n3. Ver viajes por fecha" << endl;
             cin >> opcion1;
             if (opcion1 == 1){
                 tio.verViajesGenerales();

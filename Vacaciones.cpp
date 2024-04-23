@@ -36,6 +36,7 @@ class TioBorracho{
                 destinosGenerales.insert(destino);
                 miembrosDestinos[miembro].insert(pair<string,string>(destino, anadirFechas()));
                 cout << "Destino Registrado" << endl;
+                break;
 
             }
         }
@@ -103,7 +104,7 @@ class TioBorracho{
         if(itBus != miembrosDestinos.end()){
             cout << "Miembro: " << itBus->first << endl;
             for(auto& ite2  : itBus -> second){
-                cout << "Destino: " << ite2.first << "Fecha: " << ite2.second << endl;
+                cout << "Destino: " << ite2.first << " Fecha: " << ite2.second << endl;
             }
 
         }
