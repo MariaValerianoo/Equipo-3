@@ -60,9 +60,9 @@ class TioBorracho{
                     cout << "Ingrese otra fecha" << endl;
                 }
                 else{
-                    return fecha;
+                    
                     cout << "Fecha registada" << endl;
-
+                    return fecha;
                 }
 
             }
