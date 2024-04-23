@@ -60,7 +60,7 @@ class TioBorracho{
                     cout << "Ingrese otra fecha" << endl;
                 }
                 else{
-
+                    return fecha;
                     cout << "Fecha registada" << endl;
 
                 }
@@ -76,8 +76,6 @@ class TioBorracho{
 
     }
     
-    
-
     bool fechaValida(int dia, int mes, int anio){
         
         if (dia < 1 || dia > 31)
@@ -98,7 +96,58 @@ class TioBorracho{
         return true;
     }
 
+    void verViajesMiembro(string miembro){
+
+        auto itBus = miembrosDestinos.find(miembro);
+
+        if(itBus != miembrosDestinos.end()){
+            cout << "Miembro: " << itBus->first << endl;
+            for(auto& ite2  : itBus -> second){
+                cout << "Destino: " << ite2.first << "Fecha: " << ite2.second << endl;
+            }
+
+        }
+        else{
+            cout << "Miembro no encontrado" << endl;
+        }
+
+    }
     
+    void verViajesGenerales(){
+
+        if(destinosGenerales.empty()){
+
+            cout << "No hay destinos registrados" << endl;
+            cout << "por favor resgistre un destino" << endl;
+
+        }
+        else{
+
+            for(auto& ite : destinosGenerales){
+                cout << "Destino: " << ite << endl;
+            }
+
+        }
+
+    }
+
+    void verFechasGenerales(){
+
+        if(fechasGenerales.empty()){
+
+            cout << "No hay fechas registradas" << endl;
+            cout << "por favor resgistre una fecha" << endl;
+
+        }
+        else{
+
+            for(auto& ite : fechasGenerales){
+                cout << "Fecha: " << ite << endl;
+            }
+
+        }
+
+    }
 
     
 };
