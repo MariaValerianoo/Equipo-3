@@ -9,110 +9,42 @@ class TioBorracho{
     public:
   
         set <string> destinosGenerales;
-        map <string, string> fechasGenerales;
+        set <string> fechasGenerales;
         map <string, set<string>> miembrosDestinos;
-        string miembro;
+        string miembro, destino, iteBuscar;;
 
         int dia1, mes1, anio1;
     
     public:
     
-    set <string> getDestinosGenerales(){
-        return destinosGenerales;
-    }
-    
     void anadirDestinos(){
     
-        string destino;
-            
-         while(true){
+        while(true){
 
             cout << "Ingrese el nombre del miembro: " << endl;
             cin >> miembro;
             cout << "Ingrese el destino del viaje (0. para salir): " << endl;
             cin >> destino;
             
-            destinosGenerales.insert(destino);
-            auto iteDestino = destinosGenerales.find(destino);
-            
-            if (destinosGenerales.size() != 0 && iteDestino==destinosGenerales.end()){
+            auto iteBuscar = destinosGenerales.find(destino);
 
-                cout << "El destino ingresado ya esta registrado" << endl;
-                destinosGenerales.erase(destino);
-                
-            }
-            else if(destino == "0"){
-                break;
+            if(iteBuscar != destinosGenerales.end()){
+                cout << "El destino ya ha sido registrado" << endl;
             }
             else{
-                
+
+                destinosGenerales.insert(destino);
                 miembrosDestinos[miembro].insert(destino);
-                cout << "Destino registrado" << endl;
-                break;
+                cout << "Destino Registrado" << endl;
+
             }
-            
         }
         
     }
     
-     void anadirFechas(){
-
-        string fecha, fecha1;
-        int dia, mes, anio;       
-                  
-        while(true){
-            
-            cout << "Ingrese fecha de inicio (DD/MM/AAAA): " << endl;
-            cin >> dia >> mes >> anio;
-
-            cout << "Ingrese fecha de fin (DD/MM/AAAA): " << endl;
-            cin >> dia1 >> mes1 >> anio1;
-
-            if (fechaValida(dia, mes, anio) == true && fechaValida(dia1, mes1, anio1) == true){
-
-                fecha = to_string(dia) + "/" + to_string(mes) + "/" + to_string(anio);
-                fecha1 = to_string(dia1) + "/" + to_string(mes1) + "/" + to_string(anio1);
-
-                fechasGenerales.insert(pair<string, string>(fecha, fecha1));
-                auto iteFecha = fechasGenerales.find(fecha);
-                auto iteFecha1 = fechasGenerales.find(fecha1);
-                
-                if (iteFecha == fechasGenerales.end() && iteFecha1 == fechasGenerales.end())
-                {
-                    cout << "La fecha ingresado ya esta registrado" << endl;
-                    fechasGenerales.erase(fecha);
-                    
-                }else{
-                    
-                    if(dia <= dia1 && mes <= mes1 && anio <= anio1){
-                        cout << "Fechas registradas" << endl;
-                        break;
-                    }
-                    else{
-                        cout << "Fecha de inicio no puede ser mayor a la fecha de fin" << endl;
-                    }
-                }
-                
-            }
-            else{
-
-                cout << "Fecha no valida, ingrese nuevamente" << endl;
-
-            }
-        } 
-        
-        
-    }
     
-    void mostrarDestinos(){
-        
-        for(auto iteDestino = destinosGenerales.begin(); iteDestino != destinosGenerales.end(); iteDestino++){
-            
-            cout << *iteDestino << endl;
-
-        }
-        
-    }
+    
+    
 
     bool fechaValida(int dia, int mes, int anio){
         
@@ -134,20 +66,7 @@ class TioBorracho{
         return true;
     }
 
-    void mostrarViajes(){
-
-        for(const auto& iteDestino:destinosGenerales){
-            
-            for(const auto& iteFecha:fechasGenerales){
-                
-                cout << "Destino: " << iteDestino << endl;
-                cout << "Fecha de inicio: " << iteFecha.first << endl;
-                cout << "Fecha de fin: " << iteFecha.second << endl;
-            }
-
-        }
-
-    }
+    
 
     
 };
