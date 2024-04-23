@@ -11,7 +11,8 @@ class TioBorracho{
         set <string> destinosGenerales;
         set <string> fechasGenerales;
         map <string, set<string>> miembrosDestinos;
-        string miembro, destino, iteBuscar;;
+        map <string, string> miembrosFechas;
+        string miembro, destino, iteBuscar;
 
         int dia1, mes1, anio1;
     
@@ -30,6 +31,7 @@ class TioBorracho{
 
             if(iteBuscar != destinosGenerales.end()){
                 cout << "El destino ya ha sido registrado" << endl;
+                cout << "Ingrese otro destino" << endl;
             }
             else{
 
@@ -42,7 +44,17 @@ class TioBorracho{
         
     }
     
-    
+    void anadirFechas(){
+
+        while(true){
+
+
+
+
+
+        }
+
+    }
     
     
 
