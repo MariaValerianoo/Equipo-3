@@ -1,6 +1,5 @@
 #include <iostream>
 #include <set>
-#include <cstdlib>
 #include <map>
 using namespace std;
 
@@ -10,8 +9,7 @@ class TioBorracho{
   
         set <string> destinosGenerales;
         set <string> fechasGenerales;
-        map <string, set<string>> miembrosDestinos;
-        map <string, string> miembrosFechas;
+        map <string, map<string,string>> miembrosDestinos;
         string miembro, destino, iteBuscar;
 
         int dia1, mes1, anio1;
@@ -36,7 +34,7 @@ class TioBorracho{
             else{
 
                 destinosGenerales.insert(destino);
-                miembrosDestinos[miembro].insert(destino);
+                miembrosDestinos[miembro].insert(pair<string,string>(destino, anadirFechas()));
                 cout << "Destino Registrado" << endl;
 
             }
@@ -44,13 +42,35 @@ class TioBorracho{
         
     }
     
-    void anadirFechas(){
+    string anadirFechas(){
 
         while(true){
 
+            cout << "Ingrese la fecha del viaje ((DD/MM/AAAA)  0. para salir): " << endl;
+            cin >> dia1 >> mes1 >> anio1;
 
+            if(fechaValida(dia1, mes1, anio1)){
 
+                string fecha = to_string(dia1) + "/" + to_string(mes1) + "/" + to_string(anio1);
+                
+                auto iteBuscar = fechasGenerales.find(fecha);
+                if(iteBuscar != fechasGenerales.end()){
 
+                    cout << "La fecha ya ha sido registrada" << endl;
+                    cout << "Ingrese otra fecha" << endl;
+                }
+                else{
+
+                    cout << "Fecha registada" << endl;
+
+                }
+
+            }
+            else{
+                
+                cout << "Fecha no valida" << endl;
+                cout << "Ingrese otra fecha" << endl;
+            }
 
         }
 
