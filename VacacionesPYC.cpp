@@ -4,10 +4,9 @@
 
 using namespace std;
 
-int main(){
+class TioSobrio{
 
 
 
 
-    return 0;
-}
+};
