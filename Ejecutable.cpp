@@ -1,6 +1,5 @@
 #include <iostream>
 #include <set>
-#include <cstdlib>
 #include <map>
 #include "Vacaciones.cpp"
 using namespace std;
