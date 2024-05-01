@@ -16,6 +16,8 @@ class TioSobrio{
         
         Viaje viaje;
         queue <Viaje> colaViajes;
+        queue <string> viajesGenerales;
+        queue <string> fechasGenerales;
         int dia1, mes1, anio1;
 
     public:
@@ -40,12 +42,17 @@ class TioSobrio{
             }
             else{
 
-
+                viaje.fecha = anadirFechas();
+                colaViajes.push(viaje);
+                viajesGenerales.push(viaje.destino);
+                fechasGenerales.push(viaje.fecha);
+                cout << "Destino Registrado" << endl;
                 
             }
         }
-        
     }
+        
+    
 
     bool buscarDestino(string destino){
 
@@ -82,8 +89,6 @@ class TioSobrio{
         return false; // si no esta en la cola
 
     }
-
-
 
     string anadirFechas(){
 
@@ -139,4 +144,25 @@ class TioSobrio{
         return true;
     }
 
+    void verViajesGenerales(){
+
+        queue <string> aux = viajesGenerales;
+        cout << "Destinos generales: " << endl;
+        while(!aux.empty()){
+            cout << aux.front() << endl;
+            aux.pop();
+        }
+
+    }
+
+    void verFechasGenerales(){
+
+        queue <string> aux = fechasGenerales;
+        cout << "Fechas generales: " << endl;
+        while(!aux.empty()){
+            cout << aux.front() << endl;
+            aux.pop();
+        }
+
+    }
 };
