@@ -8,6 +8,8 @@ struct Viaje{
     string destino;
     string miembro;
     string fecha;
+    string activcidades;
+    string hora;
 };
 
 class TioSobrio{
@@ -18,6 +20,7 @@ class TioSobrio{
         queue <Viaje> colaViajes;
         queue <string> viajesGenerales;
         queue <string> fechasGenerales;
+        queue <string> actividadesGenerales;
         int dia1, mes1, anio1;
 
     public:
@@ -142,6 +145,21 @@ class TioSobrio{
         return true;
     }
 
+    bool horaValida(int hora, int minuto){
+
+        if(hora < 0 || hora > 24){
+            return false;
+        }
+
+        if(minuto < 0 || minuto > 60){
+            return false;
+        }
+
+
+        return true;
+
+    }
+
     void verViajesGenerales(){
 
         queue <string> aux = viajesGenerales;
@@ -161,6 +179,21 @@ class TioSobrio{
             cout << aux.front() << endl;
             aux.pop();
         }
+
+    }
+
+    void verViajesMiembro(string miembro){
+
+        queue <Viaje> colaAux = colaViajes;
+        cout << "Viajes de " << miembro << ": " << endl;
+        while(!colaAux.empty()){
+            Viaje viaje = colaAux.front();
+            if(viaje.miembro == miembro){
+                cout << "Destino: " << viaje.destino << " Fecha: " << viaje.fecha << endl;
+            }   
+            colaAux.pop();
+        }
+
 
     }
 
