@@ -52,8 +52,6 @@ class TioSobrio{
         }
     }
         
-    
-
     bool buscarDestino(string destino){
 
         queue <Viaje> colaAux = colaViajes;
@@ -165,4 +163,5 @@ class TioSobrio{
         }
 
     }
+
 };
