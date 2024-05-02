@@ -263,7 +263,7 @@ class TioSobrio{
         while(!colaAux.empty()){
             Viaje viaje = colaAux.front();
             if(viaje.miembro == miembro){
-                cout << "Destino: " << viaje.destino << " Fecha: " << viaje.fecha << endl;
+                cout << "Destino: " << viaje.destino << " Fecha: " << viaje.fecha << endl << "Actividades: " << viaje.actividades << endl << "Hora: " << viaje.hora << endl;
             }   
             colaAux.pop();
         }
