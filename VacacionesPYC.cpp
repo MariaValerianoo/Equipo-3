@@ -3,7 +3,7 @@
 #include <stack>
 
 using namespace std;
-
+// definimos una estructura para almacenar la informacion
 struct Viaje{
     string destino;
     string miembro;
@@ -15,7 +15,7 @@ struct Viaje{
 class TioSobrio{
 
     public:
-        
+        //instanciamos la clase y creamos colas para los destinios, fechas, actividades y horas
         Viaje viaje;
         queue <Viaje> colaViajes;
         queue <string> viajesGenerales;
@@ -29,15 +29,15 @@ class TioSobrio{
     void anadirDestinos(){
         
         while(true){
-
+            //solicitamos nombre y destino
             cout << "Ingrese el nombre del miembro: " << endl;
             cin >> viaje.miembro;
             cout << "Ingrese el destino del viaje (0. para salir): " << endl;
-            cin >> viaje.destino;
+            cin >> viaje.destino; 
             
             if (viaje.destino == "0"){
                 break;
-            }
+            }// llama a la funcion y valida si el destino esta resgistrado
             else if(buscarDestino(viaje.destino) == true){
                 
                 cout << "El destino ya ha sido registrado" << endl;
@@ -45,13 +45,13 @@ class TioSobrio{
 
             }
             else if(buscarDestino(viaje.destino) == false){
-
+                // para la cada objeto de la struct llama una funcion
                 viaje.fecha = anadirFechas();
                 viaje.actividades = anadirActividades();
                 viaje.hora = anadirHora();
-                
+                //una vez llena la struct la agrega a la cola
                 colaViajes.push(viaje);
-                                
+                // agrega los objetos a las colas generales
                 viajesGenerales.push(viaje.destino);
                 fechasGenerales.push(viaje.fecha);
                 actividadesGenerales.push(viaje.actividades);
@@ -66,10 +66,10 @@ class TioSobrio{
     string anadirFechas(){
 
         while(true){
-
+            //solcita la fecha 
             cout << "Ingrese la fecha del viaje (DD/MM/AAAA): " << endl;
             cin >> dia1 >> mes1 >> anio1;
-
+            // valida si la fecha esta en los rangos y la pasa a string y valida si esta en las colas generales
             if(fechaValida(dia1, mes1, anio1)){
 
                 string fecha = to_string(dia1) + "/" + to_string(mes1) + "/" + to_string(anio1);
@@ -102,10 +102,10 @@ class TioSobrio{
         int hora, minuto;
 
         while(true){
-
+            // solicita la hora
             cout << "Ingrese la hora de la actividad (HH:MM): " << endl;
             cin >> hora >> minuto;
-
+            // valida si la hora esta en los rangos y la pasa a string y valida si esta en las colas generales
             if(horaValida(hora,minuto)){
 
                 string hora1 = to_string(hora)+ ":" + to_string(minuto);
@@ -132,10 +132,10 @@ class TioSobrio{
     string anadirActividades(){
 
         while(true){
-
+            // solicita las actividades
             cout << "Ingrese las actividades del viaje : " << endl;
             cin >> viaje.actividades;
-
+            //valida si esta en las colas generales
             if(buscarActividad(viaje.actividades) == true){
                 
                 cout << "Las actividades ya han sido registradas" << endl;
@@ -154,7 +154,7 @@ class TioSobrio{
     }
 
     bool buscarActividad(string actividad){
-
+        //crea un cola aux y valida si esta el parametro en la cola aux
         queue <Viaje> colaAux = colaViajes;
         while(!colaAux.empty()){
             Viaje viaje = colaAux.front();
@@ -172,7 +172,7 @@ class TioSobrio{
     }
 
     bool buscarDestino(string destino){
-
+        //crea un cola aux y valida si esta el parametro en la cola aux
         queue <Viaje> colaAux = colaViajes;
         while(!colaAux.empty()){
             Viaje viaje = colaAux.front();
@@ -190,7 +190,7 @@ class TioSobrio{
     }
 
     bool buscarFecha(string fecha){
-
+        //crea un cola aux y valida si esta el parametro en la cola aux
         queue <Viaje> colaAux = colaViajes;
         while(!colaAux.empty()){
             Viaje viaje = colaAux.front();
@@ -208,7 +208,7 @@ class TioSobrio{
     }
 
     bool buscarHora(string hora){
-
+        //crea un cola aux y valida si esta el parametro en la cola aux
         queue <Viaje> colaAux = colaViajes;
         while(!colaAux.empty()){
             Viaje viaje = colaAux.front();
@@ -226,7 +226,7 @@ class TioSobrio{
     }
 
     bool fechaValida(int dia, int mes, int anio){
-        
+        //valida si la fecha esta en los rangos
         if (dia < 1 || dia > 31)
         {
             return false;
@@ -246,7 +246,7 @@ class TioSobrio{
     }
 
     bool horaValida(int hora, int minuto){
-
+        // valida si la hora esta en los rangos establecidos
         if(hora < 0 || hora > 24){
             return false;
         }
@@ -261,7 +261,7 @@ class TioSobrio{
     }
 
     void verViajesGenerales(){
-
+        // crea un cola aux e imprime 
         queue <string> aux = viajesGenerales;
         cout << "Destinos generales: " << endl;
         while(!aux.empty()){
@@ -272,7 +272,7 @@ class TioSobrio{
     }
 
     void verFechasGenerales(){
-
+        // crea un cola aux e imprime 
         queue <string> aux = fechasGenerales;
         cout << "Fechas generales: " << endl;
         while(!aux.empty()){
@@ -283,7 +283,7 @@ class TioSobrio{
     }
     
     void verActividadesGenerales(){
-
+        // crea un cola aux e imprime 
         queue <string> aux = actividadesGenerales;
         cout << "Fechas generales: " << endl;
         while(!aux.empty()){
@@ -294,7 +294,7 @@ class TioSobrio{
     }
 
     void verViajesMiembro(string miembro){
-
+        // crea un cola aux e imprime los datos del miembro pasado al parametro
         queue <Viaje> colaAux = colaViajes;
         cout << "Viajes de " << miembro << ": " << endl;
         while(!colaAux.empty()){
@@ -314,7 +314,7 @@ class TioSobrio{
             string miembro;
     
             while(true){
-    
+                // menu para el usuario
                 cout << "1. para registrar un viaje" << endl << "2. para ver los destinos generales" << endl << "3. para ver las fechas generales" << endl << "4. para ver las actividades generales" << endl << "5. para ver los viajes de un miembro" << endl << "6. para salir" << endl;
                 cin >> opcion;
     
