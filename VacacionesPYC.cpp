@@ -67,7 +67,7 @@ class TioSobrio{
 
         while(true){
 
-            cout << "Ingrese la fecha del viaje ((DD/MM/AAAA)  0. para salir): " << endl;
+            cout << "Ingrese la fecha del viaje (DD/MM/AAAA): " << endl;
             cin >> dia1 >> mes1 >> anio1;
 
             if(fechaValida(dia1, mes1, anio1)){
