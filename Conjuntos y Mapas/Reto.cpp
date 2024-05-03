@@ -6,7 +6,6 @@
 
 using namespace std;
 
-// Definición de la clase Destino
 class Destino {
 private:
     string nombre;
@@ -14,10 +13,10 @@ private:
     string itinerario;
 
 public:
-    // Constructor de la clase
+    // Constructor de la clase Destino
     Destino(string nombre, string fecha, string itinerario) : nombre(nombre), fecha(fecha), itinerario(itinerario) {}
 
-    // Métodos para obtener los atributos
+    // Métodos para obtener los atributos del destino
     string getNombre() const {
         return nombre;
     }
@@ -30,77 +29,97 @@ public:
         return itinerario;
     }
     
-    // Sobrecarga del operador de igualdad para comparar destinos por nombre
     bool operator==(const Destino& otro) const {
         return nombre == otro.nombre;
     }
 };
 
-// Definición de la clase MiembroFamilia
-class MiembroFamilia {
+class MiembroFami {
 private:
     string nombre;
     unordered_set<Destino*> destinosPlanificados;
 
 public:
-    // Constructor de la clase
-    MiembroFamilia(string nombre) : nombre(nombre) {}
+    // Constructor de la clase MiembroFamilia
+    MiembroFami(string nombre) : nombre(nombre) {}
 
-    // Métodos para obtener los atributos
+    // Método para obtener el nombre del miembro
     string getNombre() const {
         return nombre;
     }
 
-    // Agregar un destino planificado al conjunto
+    // Método para agregar un destino planificado al miembro
     void agregarDestino(Destino* destino) {
         destinosPlanificados.insert(destino);
     }
 
-    // Obtener una referencia constante al conjunto de destinos planificados
+    // Método para obtener los destinos planificados del miembro
     const unordered_set<Destino*>& getDestinosPlanificados() const {
         return destinosPlanificados;
     }
 };
 
-// Definición de la clase GestionVacaciones
 class GestionVacaciones {
 private:
     unordered_set<Destino*> destinosGenerales;
-    map<string, MiembroFamilia*> miembrosFamilia;
+    map<string, MiembroFami*> miembrosFamilia;
     map<Destino*, string> itinerarios;
 
 public:
-    // Agregar un nuevo destino a la lista general de destinos
-    void agregarDestino(const string& nombre, const string& fecha, const string& itinerario) {
-        Destino nuevoDestino(nombre, fecha, itinerario);
-        // Verificar si el destino ya existe en la lista general
-        if (destinosGenerales.find(&nuevoDestino) != destinosGenerales.end()) {
-            cout << "El destino ya existe en la lista general." << endl;
-            return;
+    // Método para agregar un nuevo destino a la lista general de destinos
+    void agregarDest(const string& nombre, const string& fecha, const string& itinerario) {
+        string itin = itinerario;
+        char opcion;
+        cout << "¿Desea crear un itinerario personalizado? (s/n): ";
+        cin >> opcion;
+        if (opcion == 's' || opcion == 'S') {
+            genItinerarioUsuario(itin);
+        } else {
+            itin = "Día 1: Llegada y check-in\nDía 2: Explorar lugares de interés\nDía 3: Actividades recreativas\nDía 4: Check-out y partida";
         }
-        // Crear un nuevo objeto Destino en el heap y agregarlo al conjunto
-        Destino* ptrNuevoDestino = new Destino(nombre, fecha, itinerario);
+        
+        Destino* ptrNuevoDestino = new Destino(nombre, fecha, itin);
         destinosGenerales.insert(ptrNuevoDestino);
-        itinerarios[ptrNuevoDestino] = itinerario;
+        itinerarios[ptrNuevoDestino] = itin;
+        cout << "Agregado con éxito. Si deseas conocer el itinerario, puedes encontrarlo al momento de planificar un viaje" << endl;
     }
 
-    // Planificar un viaje para un miembro de la familia hacia un destino específico
-    void planificarViaje(MiembroFamilia* miembro, const string& destinoNombre, const string& fecha) {
-        // Buscar el destino en la lista general
-        auto it = find_if(destinosGenerales.begin(), destinosGenerales.end(), [&destinoNombre](const Destino* destino){
-            return destino->getNombre() == destinoNombre;
+    // Método para permitir a un miembro de la familia planificar un viaje a un destino específico
+    void planificarViaje(MiembroFami* miembro, const string& destinoNom, const string& fecha) {
+        cout << "Lista de destinos disponibles:" << endl;
+        for (const Destino* destino : destinosGenerales) {
+            cout << destino->getNombre() << endl;
+        }
+
+        auto it = find_if(destinosGenerales.begin(), destinosGenerales.end(), [&destinoNom](const Destino* destino){
+            return destino->getNombre() == destinoNom;
         });
-        // Verificar si el destino especificado existe
+        
         if (it == destinosGenerales.end()) {
             cout << "El destino especificado no existe." << endl;
-            return;
+            char opcion;
+            cout << "¿Desea agregar este destino a la lista general? (s/n): ";
+            cin >> opcion;
+            if (opcion == 's' || opcion == 'S') {
+                string fecha, itinerario;
+                cout << "Ingrese la fecha del destino: ";
+                cin >> fecha;
+                cout << "Ingrese el itinerario del destino: ";
+                cin.ignore();
+                getline(cin, itinerario);
+                agregarDest(destinoNom, fecha, itinerario);
+                planificarViaje(miembro, destinoNom, fecha);
+                return;
+            } else {
+                return;
+            }
         }
-        // Agregar el destino planificado al miembro de la familia
+        
         miembro->agregarDestino(*it);
     }
 
-    // Consultar los destinos planificados para un miembro de la familia
-    void consultarDestinosPlanificados(MiembroFamilia* miembro) const {
+    // Método para mostrar los destinos planificados por un miembro de la familia
+    void consultarDestinosPlanificados(MiembroFami* miembro) const {
         cout << "Destinos planificados para " << miembro->getNombre() << ":" << endl;
         for (const Destino* destino : miembro->getDestinosPlanificados()) {
             cout << destino->getNombre() << " - Fecha: " << destino->getFecha() << endl;
@@ -108,18 +127,30 @@ public:
         }
     }
 
-    // Encontrar miembros de la familia que planean visitar un destino específico
-    void encontrarMiembrosPorDestino(const string& destinoNombre) const {
-        cout << "Miembros que planean visitar " << destinoNombre << ":" << endl;
+    // Método para encontrar los miembros de la familia que planean visitar un destino específico
+    void encontrarMiembrosPorDestino(const string& destinoNom) const {
+        cout << "Miembros que planean visitar " << destinoNom << ":" << endl;
         for (const auto& pair : miembrosFamilia) {
-            const MiembroFamilia* miembro = pair.second;
+            const MiembroFami* miembro = pair.second;
             for (const Destino* destino : miembro->getDestinosPlanificados()) {
-                if (destino->getNombre() == destinoNombre) {
+                if (destino->getNombre() == destinoNom) {
                     cout << miembro->getNombre() << endl;
                     break;
                 }
             }
         }
     }
-};
 
+    // Método para generar un itinerario personalizado para un destino
+    void genItinerarioUsuario(string& itinerario) {
+        cout << "Ingrese el itinerario para los siguientes tres días:" << endl;
+        for (int i = 1; i <= 3; ++i) {
+            cout << "Día " << i << ": ";
+            string actividad;
+            cin.ignore(); 
+            getline(cin, actividad);
+            itinerario += "\nDía " + to_string(i) + ": " + actividad;
+        }
+        cout << "Creado con éxito" << endl;
+    }
+};

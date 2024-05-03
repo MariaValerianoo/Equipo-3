@@ -2,70 +2,68 @@
 using namespace std;
 #include "./Reto.cpp"
 
-// Función para mostrar el menú de opciones
-void mostrarMenu() {
-    cout << "¡Bienvenido al sistema de gestion de vacaciones de la familia!" << endl;
-    cout << "1. Agregar destino a la lista general" << endl;
-    cout << "2. Planificar viaje para un miembro de la familia" << endl;
-    cout << "3. Consultar destinos planificados para un miembro de la familia" << endl;
-    cout << "4. Encontrar miembros que planean visitar un destino específico" << endl;
-    cout << "5. Salir" << endl;
-    cout << "Ingrese el número de la opción que desea ejecutar: ";
-}
+
+
 
 // Función principal
 int main() {
-    // Crear una instancia de la clase GestionVacaciones
+    // Crear objeto para gestionar las vacaciones
     GestionVacaciones gestion;
 
     int opcion;
-    string nombre, fecha, destinoNombre;
+    string nombre;
+    string fecha;
+    string destinoNom;
     while (true) {
-        // Mostrar el menú y leer la opción del usuario
-        mostrarMenu();
+        // Menú de opciones
+        cout << "¡Bienvenido al sistema de gestión de vacaciones de la familia!" << endl;
+        cout << "1. Agregar destino a la lista general" << endl;
+        cout << "2. Planificar viaje para un miembro de la familia" << endl;
+        cout << "3. Consultar destinos planificados para un miembro de la familia" << endl;
+        cout << "4. Encontrar miembros que planean visitar un destino específico" << endl;
+        cout << "5. Salir" << endl;
+        cout << "Ingrese el número de la opción que desea ejecutar: ";
         cin >> opcion;
 
         switch (opcion) {
             case 1:
-                // Agregar destino a la lista general
+                // Opción para agregar un destino a la lista general
                 cout << "Ingrese el nombre del destino: ";
-                cin>>nombre;
+                cin >> nombre;
                 cout << "Ingrese la fecha del destino: ";
-                cin>>fecha;
-                cout << "Ingrese el itinerario del destino: ";
-                getline(cin, destinoNombre);
-                gestion.agregarDestino(nombre, fecha, destinoNombre);
+                cin >> fecha;
+                gestion.agregarDest(nombre, fecha, ""); 
                 break;
             case 2:
-                // Planificar viaje para un miembro de la familia
+                // Opción para planificar un viaje para un miembro de la familia
                 cout << "Ingrese el nombre del miembro de la familia: ";
                 cin >> nombre;
                 cout << "Ingrese el nombre del destino: ";
-                cin >> destinoNombre;
+                cin >> destinoNom;
                 cout << "Ingrese la fecha del viaje: ";
                 cin >> fecha;
                 cin.ignore();
-                gestion.planificarViaje(new MiembroFamilia(nombre), destinoNombre, fecha);
+                gestion.planificarViaje(new MiembroFami(nombre), destinoNom, fecha);
                 break;
             case 3:
-                // Consultar destinos planificados para un miembro de la familia
+                // Opción para consultar destinos planificados para un miembro de la familia
                 cout << "Ingrese el nombre del miembro de la familia: ";
                 cin >> nombre;
-                gestion.consultarDestinosPlanificados(new MiembroFamilia(nombre));
+                gestion.consultarDestinosPlanificados(new MiembroFami(nombre));
                 break;
             case 4:
-                // Encontrar miembros que planean visitar un destino específico
+                // Opción para encontrar miembros que planean visitar un destino específico
                 cout << "Ingrese el nombre del destino: ";
-                cin >> destinoNombre;
-                gestion.encontrarMiembrosPorDestino(destinoNombre);
+                cin >> destinoNom;
+                gestion.encontrarMiembrosPorDestino(destinoNom);
                 break;
             case 5:
-                // Salir del programa
+                // Opción para salir del programa
                 cout << "Saliendo del programa..." << endl;
                 return 0;
             default:
                 // Opción inválida
-                cout << "Opcion invalida. Por favor, ingrese un numero valido." << endl;
+                cout << "Opción inválida. Por favor, ingrese un número válido." << endl;
                 break;
         }
     }
