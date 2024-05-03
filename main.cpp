@@ -5,11 +5,12 @@
 #include <vector>
 using namespace std;
 
-class Destino
+class Destino // clase destino
 {
 private:
     string nombre; // nombre del destino
 public:
+    // constructores
     Destino(string &n)
     {
         nombre = n;
@@ -17,6 +18,7 @@ public:
 
     Destino() {}
 
+    // sets, gets
     void setNombre(const string &nombre)
     {
         this->nombre = nombre;
@@ -32,7 +34,9 @@ public:
         return nombre < other.nombre;
     }
 
-    void Agregar_Destino(Destino &destino, set<Destino> &destinos)
+    // metodos
+    void Agregar_Destino(Destino &destino, set<Destino> &destinos) // Agregar destinos a la lista general de la familia y como es un conjunto, se
+    // Asegura que los destinos no se repitan.
     {
         for (const auto &dest : destinos)
         {
@@ -49,6 +53,7 @@ public:
     }
 };
 
+// clase actividades
 class Actividades
 {
 private:
@@ -59,6 +64,7 @@ private:
     vector<Actividades> actividades;
 
 public:
+    // constructores
     Actividades() {}
     Actividades(string nombre_actividad, string hora_actividad, string lugar_actividad, string descripcion_actividad)
     {
@@ -67,6 +73,8 @@ public:
         this->lugar = lugar;
         this->descripcion = descripcion;
     }
+
+    // sets, gets
     string getActividad() const
     {
         return actividad;
@@ -100,15 +108,23 @@ public:
         this->descripcion = descripcion;
     }
 
-    vector<Actividades> getActividades()
+    vector<Actividades> getActividades() // es vector porque von este se va a realizar ls lista
     {
         return actividades;
     }
 
-    void agregaractividad(const Actividades &actividad)
+    // metodos
+    void agregaractividad(const Actividades &actividad) // agrega las actividades
     {
         actividades.push_back(actividad);
     }
+
+    // crear actividad: hace que el familiar cree una actividad
+    /*toma tres parametros
+    miembro_familiar: el familiar del cual se quiere saber la actividades
+    actividades: es un objeto de la clase actividades
+    asignaciones_actividad: es un mapa que relaciona las actividades con cada miembro de la familia
+    */
 
     void Crear_actividad(string miembro_familia, Actividades actividades, map<string, Actividades> &asignaciones_actividad)
     {
@@ -128,14 +144,20 @@ public:
         }
     }
 
+    /*MUESTRA LA ACTIVIDAD
+    toma dos parametros
+    miembro_familiar: el familiar del cual se quiere saber la actividades
+    asignaciones actividad: es un mapa que relaciona las actividades con cada miembro de la familia*/
+
     void mostrar_actividades(string miembro_familiar, map<string, Actividades> &asignaciones_actividad)
     {
-        auto iterador = asignaciones_actividad.find(miembro_familiar);
-        if (iterador != asignaciones_actividad.end())
+        auto iterador = asignaciones_actividad.find(miembro_familiar); // se crea el iterador que apunta al familiar que contiene esa actividad
+        if (iterador != asignaciones_actividad.end())                  // si el iterrador es diferente a asignaciones_actividad.end() significa que encpntro al informacion
         {
             cout << "Las actividades de " << miembro_familiar << " son: " << endl;
             for (const auto &actividades : iterador->second.getActividades())
             {
+
                 cout << "Actividad: " << actividades.getActividad() << endl;
                 cout << "Hora: " << actividades.getHora() << endl;
                 cout << "Lugar: " << actividades.getLugar() << endl;
@@ -143,11 +165,13 @@ public:
                 return;
             }
         }
+
         cout << "no hay viajes asignados para este familia " << endl;
         return;
     }
 };
 
+// clase viaje
 class Viaje
 {
 private:
@@ -156,6 +180,7 @@ private:
     string fecha_devuelta;
 
 public:
+    // constructores
     Viaje() {}
     Viaje(string &destino, string &fecha_salida, string &fecha_devuelta)
     {
@@ -163,6 +188,7 @@ public:
         this->fecha_salida = fecha_salida;
         this->fecha_devuelta = fecha_devuelta;
     }
+    // sets, gets
     string getDestino() const
     {
         return destino;
@@ -189,6 +215,7 @@ public:
     }
 };
 
+// clase planeacion_viaje
 class Planeacion_viaje
 {
 private:
@@ -196,6 +223,7 @@ private:
     map<string, Viaje> asignaciones_familia;
 
 public:
+    // constructores
     Planeacion_viaje() {}
 
     Planeacion_viaje(string miembro_familia)
@@ -203,6 +231,7 @@ public:
         this->miembro_familia = miembro_familia;
     }
 
+    // sets, gets
     string getMiembro_Familia(string miembro_familia)
     {
         return miembro_familia;
@@ -212,6 +241,15 @@ public:
     {
         this->miembro_familia = miembro_familia;
     }
+
+    // metodos
+    // asignar viajes:  se encarga de asignar un viaje a un miembro de la familia
+    // 1. se verifica que el miembro de la familia no tenga un viaje asignado
+    // 2. se verifica que el viaje no coincida con el de otro miembro de la familia
+    // 3. se asigna el viaje al miembro de la familia
+    // 4. se imprime el mensaje de que el viaje fue asignado
+    // 5. se imprime el mensaje de que el miembro de la familia ya tiene un viaje asignado
+    // 6. se imprime el mensaje de que el viaje coincide con el de otro miembro de la familia
 
     void Asignar_viaje(string miembro_familia, map<string, Viaje> &asignaciones_familia, Viaje viaje)
     {
@@ -238,6 +276,10 @@ public:
     }
 };
 
+// consultar destinos: se encarga de consultar los destinos de los viajes de un miembro de la familia
+// 1. se verifica que el miembro de la familia tenga un viaje asignado
+// 2. se imprime el mensaje de que el miembro de la familia no tiene un viaje asignado
+// 3. se imprime el destino del viaje del miembro de la familia
 
 void Consultar_Destino(string miembro, map<string, Viaje> &asignaciones_familia)
 {
@@ -253,6 +295,7 @@ void Consultar_Destino(string miembro, map<string, Viaje> &asignaciones_familia)
     }
 }
 
+// destino especifico: se encarga de Consultar todos los destinos planificados para unmiembro específico
 void destino_especifico(string &destino_bucar, map<string, Viaje> &asignaciones_familia)
 {
     cout << "Ingrese el destino que desea buscar: " << endl;
@@ -275,6 +318,7 @@ void destino_especifico(string &destino_bucar, map<string, Viaje> &asignaciones_
     }
 }
 
+// clase de interfaz: Menu
 class Interfaz
 {
 private:
@@ -414,7 +458,9 @@ public:
                 actividades.mostrar_actividades(miembro_familia, asignaciones_actividad);
 
                 break;
-
+            case 8:
+                shutdown = 1;
+                break;
             default:
                 cout << "Opcion no valida" << endl;
                 break;
