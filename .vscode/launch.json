@@ -2,23 +2,16 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "(gdb) Bash on Windows Launch",
+            "name": "C/C++ Runner: Debug Session",
             "type": "cppdbg",
             "request": "launch",
-            "program": "enter program name, for example ${workspaceFolder}/a.exe",
             "args": [],
             "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "externalConsole": false,
-            "pipeTransport": {
-                "debuggerPath": "/usr/bin/gdb",
-                "pipeProgram": "${env:windir}\\system32\\bash.exe",
-                "pipeArgs": [
-                    "-c"
-                ],
-                "pipeCwd": ""
-            },
+            "externalConsole": true,
+            "cwd": "${workspaceFolder}/build/Debug/",
+            "program": "${workspaceFolder}/build/Debug/outDebug",
+            "MIMode": "gdb",
+            "miDebuggerPath": "gdb",
             "setupCommands": [
                 {
                     "description": "Enable pretty-printing for gdb",
