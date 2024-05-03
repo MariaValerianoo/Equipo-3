@@ -150,5 +150,45 @@ class TioBorracho{
 
     }
 
+
+    void menu(){
+
+        int opcion;
+        string miembro;
+
+        while(true){
+
+            cout << "Bienvenido al sistema de registro de viajes" << endl;
+            cout << "1. para registrar un viaje" << endl << "2. para ver los viajes de un miembro" << endl << "3. para ver los destinos generales" << endl << "4. para ver las fechas generales" << endl << "5. para salir" << endl;
+            cin >> opcion;
+
+            if(opcion == 1){
+                anadirDestinos();
+            }
+            else if(opcion == 2){
+                cout << "Ingrese el nombre del miembro: " << endl;
+                cin >> miembro;
+                verViajesMiembro(miembro);
+            }
+            else if(opcion == 3){
+                verViajesGenerales();
+            }
+            else if(opcion == 4){
+                verFechasGenerales();
+            }
+            else if(opcion == 5){
+                cout << "Saliendo del sistema" << endl;
+                break;
+            }
+            else{
+                cout << "Opcion invalida" << endl;
+            }
+
+        }
+
+
+
+    }
+
     
 };

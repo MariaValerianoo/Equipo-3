@@ -21,7 +21,7 @@ int main(){
         cin >> opcion;
         
         if(opcion == 1){
-            
+            tio.menu();
         }
         else if(opcion == 2){
             tio1.menu();
