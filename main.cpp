@@ -238,30 +238,6 @@ public:
     }
 };
 
-// void Actividad(string miembro_familiar, map<string, Viaje> &asignaciones_familia)
-// {
-//     string nombre_actividad;
-//     string hora_actividad;
-//     string lugar_actividad;
-//     // string descrip_actividad;
-
-//     cout << "Ingrese el nombtre de la actividad: " << endl;
-//     cout << nombre_actividad;
-//     cout << "Ingrese la hora de la actividad: " << endl;
-//     cout << hora_actividad;
-//     cout << "Ingrese el lugar de la actividad: " << endl;
-//     cout << lugar_actividad;
-
-//     auto iterador = asignaciones_familia.find(miembro_familiar);
-//     if (iterador != asignaciones_familia.end())
-//     {
-//         cout << "Ano hay viajes asignados para este familiar: " << endl;
-//         return;
-//     }
-
-//     iterador.second.agregaractividad(Actividades(nombre_actividad, hora_actividad, lugar_actividad));
-//     cout << "Actividad agregada con éxito al viaje del familiar " << miembro_familiar;
-// }
 
 void Consultar_Destino(string miembro, map<string, Viaje> &asignaciones_familia)
 {
