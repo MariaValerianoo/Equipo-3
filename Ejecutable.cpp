@@ -2,47 +2,40 @@
 #include <set>
 #include <map>
 #include "Vacaciones.cpp"
+#include "VacacionesPYC.cpp"
+
 using namespace std;
 
 
 int main(){
     
     TioBorracho tio;
+    TioSobrio tio1;
     string miembro;
     int opcion,opcion1;
     
-    while (true)
-    {
-        cout << "Bienvenido familiar :" << endl;
-        cout << "1. para registrar destinos \n2. para ver destinos " << endl << "0.para salir" << endl;
+    while (true){
+        
+        cout << "Bienvenido al sistema de registro de viajes" << endl;
+        cout << "1. para la solucion de Conjuntos y mapas" << endl << "2. para la solucion de Colas y Pilas" << endl << "3. para salir" << endl;
         cin >> opcion;
         
         if(opcion == 1){
-            tio.anadirDestinos();
+            
         }
         else if(opcion == 2){
-            cout << "1. Ver destinos generales \n2. Ver destinos por miembro \n3. Ver viajes por fecha" << endl;
-            cin >> opcion1;
-            if (opcion1 == 1){
-                tio.verViajesGenerales();
-            }
-            else if (opcion1 == 2){
-                cout << "Ingrese el nombre del miembro: " << endl;
-                cin >> miembro;
-                tio.verViajesMiembro(miembro);
-            }
-            else if (opcion1 == 2){
-                tio.verFechasGenerales();
-            }
-        }     
-        else if(opcion == 0){
-            cout << "Hasta luego" << endl;
+            tio1.menu();
+        }
+        else if(opcion == 3){
+            cout << "Saliendo del sistema" << endl;
             break;
         }
         else{
-            cout << "Opcion no valida" << endl;
+            cout << "Opcion invalida" << endl;
         }
+
     }
+    
 
     return 0;
 }

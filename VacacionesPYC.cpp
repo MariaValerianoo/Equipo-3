@@ -58,7 +58,7 @@ class TioSobrio{
                 horasGenerales.push(viaje.hora);
                 
                 cout << "Destino Registrado" << endl;
-                
+                break;
             }
         }
     }
@@ -308,49 +308,42 @@ class TioSobrio{
 
     }
 
+    void menu(){
+            
+            int opcion;
+            string miembro;
+    
+            while(true){
+    
+                cout << "1. para registrar un viaje" << endl << "2. para ver los destinos generales" << endl << "3. para ver las fechas generales" << endl << "4. para ver las actividades generales" << endl << "5. para ver los viajes de un miembro" << endl << "6. para salir" << endl;
+                cin >> opcion;
+    
+                if(opcion == 1){
+                    anadirDestinos();
+                }
+                else if(opcion == 2){
+                    verViajesGenerales();
+                }
+                else if(opcion == 3){
+                    verFechasGenerales();
+                }
+                else if(opcion == 4){
+                    verActividadesGenerales();
+                }
+                else if(opcion == 5){
+                    cout << "Ingrese el nombre del miembro: " << endl;
+                    cin >> miembro;
+                    verViajesMiembro(miembro);
+                }
+                else if(opcion == 6){
+                    cout << "Saliendo del sistema" << endl;
+                    break;
+                }
+                else{
+                    cout << "Opcion invalida" << endl;
+                }
+    
+            }
+    }
 };
 
-
-int main(){
-
-    TioSobrio tio;
-    string miembro;
-    int opcion,opcion1;
-    
-    while (true)
-    {
-        cout << "Bienvenido familiar :" << endl;
-        cout << "1. para registrar destinos \n2. para ver destinos " << endl << "0.para salir" << endl;
-        cin >> opcion;
-        
-        if(opcion == 1){
-            tio.anadirDestinos();
-        }
-        else if(opcion == 2){
-            cout << "1. Ver destinos generales \n2. Ver destinos por miembro \n3. Ver viajes por fecha" << endl;
-            cin >> opcion1;
-            if (opcion1 == 1){
-                tio.verViajesGenerales();
-            }
-            else if (opcion1 == 2){
-                cout << "Ingrese el nombre del miembro: " << endl;
-                cin >> miembro;
-                tio.verViajesMiembro(miembro);
-            }
-            else if (opcion1 == 2){
-                tio.verFechasGenerales();
-            }
-        }     
-        else if(opcion == 0){
-            cout << "Hasta luego" << endl;
-            break;
-        }
-        else{
-            cout << "Opcion no valida" << endl;
-        }
-    }
-    
-
-
-    return 0;
-}
