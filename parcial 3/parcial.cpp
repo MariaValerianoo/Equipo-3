@@ -5,13 +5,6 @@
 #include <vector>
 using namespace std;
 
-/*registre los miembros de la famila con la edad y ordenar del mas viejo al mas joven*/
-// struct Miembros_familia
-// {
-//     string miembro_familia;
-//     int edad;
-// };
-
 void registrar_miembros(string familiar, int edad, map<string, int> miembros)
 {
     cout << "Ingrese usted que mimbro de la familia es: " << endl;
@@ -21,19 +14,17 @@ void registrar_miembros(string familiar, int edad, map<string, int> miembros)
 
     miembros.insert(pair<string, int>(familiar, edad));
 
+    auto iterador = miembros.find(edad);
+    for (const auto edades : miembros)
+    {
+        if (edades > miembros)
+        {
+            cout << "El familiar " << familiar << " es el mas viejo" << endl;
+        }
+    }
+
     cout << "familiar registrado" << endl;
 }
-
-// void integrangtes(map<string, int> miembros)
-// {
-//     cout << "los miembros de la familia son: " << endl;
-//     for (const auto &edades : edad)
-//         while (/* condition */)
-//         {
-//             /* code */
-//         }
-// }
-
 int main()
 {
     map<string, int> miembros;
