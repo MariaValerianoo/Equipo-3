@@ -112,8 +112,8 @@ class TioSobrio{
 
                 if(buscarHora(hora1) == true){
                 
-                cout << "Ya hay actividades registradas en esas horas" << endl;
-                cout << "Ingrese otras validas" << endl;
+                    cout << "Ya hay actividades registradas en esas horas" << endl;
+                    cout << "Ingrese otras validas" << endl;
 
                 }
                 else if(buscarHora(hora1) == false){
