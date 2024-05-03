@@ -1,6 +1,6 @@
 #include <iostream>
 #include "VacacionesCYC.cpp"
-#Include "VacacionesPYC.cpp"
+#include "VacacionesPYC.cpp"
 using namespace std;
 
 int main(){
