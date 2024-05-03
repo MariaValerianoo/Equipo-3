@@ -48,11 +48,15 @@ class TioSobrio{
 
                 viaje.fecha = anadirFechas();
                 viaje.actividades = anadirActividades();
+                viaje.hora = anadirHora();
+                
                 colaViajes.push(viaje);
+                                
                 viajesGenerales.push(viaje.destino);
                 fechasGenerales.push(viaje.fecha);
                 actividadesGenerales.push(viaje.actividades);
                 horasGenerales.push(viaje.hora);
+                
                 cout << "Destino Registrado" << endl;
                 
             }
@@ -93,7 +97,7 @@ class TioSobrio{
 
     }
 
-    string anadirActividades(){
+    string anadirHora(){
 
         int hora, minuto;
 
@@ -102,16 +106,22 @@ class TioSobrio{
             cout << "Ingrese la hora de la actividad (HH:MM): " << endl;
             cin >> hora >> minuto;
 
-            if(buscarActividad(viaje.fecha) == true){
+            if(horaValida(hora,minuto)){
+
+                string hora1 = to_string(hora)+ ":" + to_string(minuto);
+
+                if(buscarHora(hora1) == true){
                 
                 cout << "Ya hay actividades registradas en esas horas" << endl;
                 cout << "Ingrese otras validas" << endl;
 
-            }
-            else if(buscarActividad(viaje.fecha) == false){
-                
-                cout << "Actividades registradas" << endl;
-                return viaje.fecha;
+                }
+                else if(buscarHora(hora1) == false){
+                    
+                    cout << "Actividades registradas" << endl;
+                    return hora1;
+
+                }
 
             }
 
@@ -197,7 +207,23 @@ class TioSobrio{
 
     }
 
-    
+    bool buscarHora(string hora){
+
+        queue <Viaje> colaAux = colaViajes;
+        while(!colaAux.empty()){
+            Viaje viaje = colaAux.front();
+            if(viaje.hora == hora){
+                return true; // si esta en la cola
+            }
+            else{
+                colaAux.pop();
+            }
+            
+        }
+
+        return false; // si no esta en la cola
+
+    }
 
     bool fechaValida(int dia, int mes, int anio){
         
@@ -255,6 +281,7 @@ class TioSobrio{
         }
 
     }
+    
     void verActividadesGenerales(){
 
         queue <string> aux = actividadesGenerales;
@@ -282,3 +309,48 @@ class TioSobrio{
     }
 
 };
+
+
+int main(){
+
+    TioSobrio tio;
+    string miembro;
+    int opcion,opcion1;
+    
+    while (true)
+    {
+        cout << "Bienvenido familiar :" << endl;
+        cout << "1. para registrar destinos \n2. para ver destinos " << endl << "0.para salir" << endl;
+        cin >> opcion;
+        
+        if(opcion == 1){
+            tio.anadirDestinos();
+        }
+        else if(opcion == 2){
+            cout << "1. Ver destinos generales \n2. Ver destinos por miembro \n3. Ver viajes por fecha" << endl;
+            cin >> opcion1;
+            if (opcion1 == 1){
+                tio.verViajesGenerales();
+            }
+            else if (opcion1 == 2){
+                cout << "Ingrese el nombre del miembro: " << endl;
+                cin >> miembro;
+                tio.verViajesMiembro(miembro);
+            }
+            else if (opcion1 == 2){
+                tio.verFechasGenerales();
+            }
+        }     
+        else if(opcion == 0){
+            cout << "Hasta luego" << endl;
+            break;
+        }
+        else{
+            cout << "Opcion no valida" << endl;
+        }
+    }
+    
+
+
+    return 0;
+}
