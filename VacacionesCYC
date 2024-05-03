@@ -469,13 +469,3 @@ public:
     }
 };
 
-/*
-int main()
-{
-
-    Interfaz interfaz1;
-    interfaz1.Menu();
-
-    return 0;
-}
-*/
