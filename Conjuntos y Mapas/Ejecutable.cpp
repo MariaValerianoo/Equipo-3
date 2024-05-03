@@ -31,7 +31,7 @@ int main() {
                 cout << "Ingrese el nombre del destino: ";
                 cin>>nombre;
                 cout << "Ingrese la fecha del destino: ";
-                getline(cin, fecha);
+                cin>>fecha;
                 cout << "Ingrese el itinerario del destino: ";
                 getline(cin, destinoNombre);
                 gestion.agregarDestino(nombre, fecha, destinoNombre);
