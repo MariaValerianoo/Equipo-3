@@ -4,7 +4,7 @@
 
 using namespace std;
 // definimos una estructura para almacenar la informacion
-struct Viaje{
+struct Viaje1{
     string destino;
     string miembro;
     string fecha;
@@ -16,8 +16,8 @@ class TioSobrio{
 
     public:
         //instanciamos la clase y creamos colas para los destinios, fechas, actividades y horas
-        Viaje viaje;
-        queue <Viaje> colaViajes;
+        Viaje1 viaje;
+        queue <Viaje1> colaViajes;
         queue <string> viajesGenerales;
         queue <string> fechasGenerales;
         queue <string> actividadesGenerales;
@@ -155,9 +155,9 @@ class TioSobrio{
 
     bool buscarActividad(string actividad){
         //crea un cola aux y valida si esta el parametro en la cola aux
-        queue <Viaje> colaAux = colaViajes;
+        queue <Viaje1> colaAux = colaViajes;
         while(!colaAux.empty()){
-            Viaje viaje = colaAux.front();
+            Viaje1 viaje = colaAux.front();
             if(viaje.actividades == actividad){
                 return true; // si esta en la cola
             }
@@ -173,9 +173,9 @@ class TioSobrio{
 
     bool buscarDestino(string destino){
         //crea un cola aux y valida si esta el parametro en la cola aux
-        queue <Viaje> colaAux = colaViajes;
+        queue <Viaje1> colaAux = colaViajes;
         while(!colaAux.empty()){
-            Viaje viaje = colaAux.front();
+            Viaje1 viaje = colaAux.front();
             if(viaje.destino == destino){
                 return true; // si esta en la cola
             }
@@ -191,9 +191,9 @@ class TioSobrio{
 
     bool buscarFecha(string fecha){
         //crea un cola aux y valida si esta el parametro en la cola aux
-        queue <Viaje> colaAux = colaViajes;
+        queue <Viaje1> colaAux = colaViajes;
         while(!colaAux.empty()){
-            Viaje viaje = colaAux.front();
+            Viaje1 viaje = colaAux.front();
             if(viaje.fecha == fecha){
                 return true; // si esta en la cola
             }
@@ -209,9 +209,9 @@ class TioSobrio{
 
     bool buscarHora(string hora){
         //crea un cola aux y valida si esta el parametro en la cola aux
-        queue <Viaje> colaAux = colaViajes;
+        queue <Viaje1> colaAux = colaViajes;
         while(!colaAux.empty()){
-            Viaje viaje = colaAux.front();
+            Viaje1 viaje = colaAux.front();
             if(viaje.hora == hora){
                 return true; // si esta en la cola
             }
@@ -295,10 +295,10 @@ class TioSobrio{
 
     void verViajesMiembro(string miembro){
         // crea un cola aux e imprime los datos del miembro pasado al parametro
-        queue <Viaje> colaAux = colaViajes;
+        queue <Viaje1> colaAux = colaViajes;
         cout << "Viajes de " << miembro << ": " << endl;
         while(!colaAux.empty()){
-            Viaje viaje = colaAux.front();
+            Viaje1 viaje = colaAux.front();
             if(viaje.miembro == miembro){
                 cout << "Destino: " << viaje.destino << " Fecha: " << viaje.fecha << endl << "Actividades: " << viaje.actividades << endl << "Hora: " << viaje.hora << endl;
             }   
