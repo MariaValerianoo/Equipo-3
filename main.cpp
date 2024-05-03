@@ -53,10 +53,10 @@ class Actividades
 {
 private:
     string actividad;
-    // string fecha;
     string hora;
     string lugar;
     string descripcion;
+    vector<Actividades> actividades;
 
 public:
     Actividades() {}
@@ -67,19 +67,19 @@ public:
         this->lugar = lugar;
         this->descripcion = descripcion;
     }
-    string getActividad()
+    string getActividad() const
     {
         return actividad;
     }
-    string getHora()
+    string getHora() const
     {
         return hora;
     }
-    string getLugar()
+    string getLugar() const
     {
         return lugar;
     }
-    string getDescripcion()
+    string getDescripcion() const
     {
         return descripcion;
     }
@@ -99,6 +99,53 @@ public:
     {
         this->descripcion = descripcion;
     }
+
+    vector<Actividades> getActividades()
+    {
+        return actividades;
+    }
+
+    void agregaractividad(const Actividades &actividad)
+    {
+        actividades.push_back(actividad);
+    }
+
+    void Crear_actividad(string miembro_familia, Actividades actividades, map<string, Actividades> &asignaciones_actividad)
+    {
+        auto iterador = asignaciones_actividad.find(miembro_familia);
+        if (iterador != asignaciones_actividad.end())
+        {
+            iterador->second.actividades.push_back(actividades);
+            cout
+                << "La actividad ya esta en la lista" << endl;
+            return;
+        }
+        else
+        {
+            asignaciones_actividad.insert(make_pair(miembro_familia, actividades));
+            cout << "Actividad agregado" << endl;
+            cout << "" << endl;
+        }
+    }
+
+    void mostrar_actividades(string miembro_familiar, map<string, Actividades> &asignaciones_actividad)
+    {
+        auto iterador = asignaciones_actividad.find(miembro_familiar);
+        if (iterador != asignaciones_actividad.end())
+        {
+            cout << "Las actividades de " << miembro_familiar << "son: " << endl;
+            for (const auto &actividades : iterador->second.getActividades())
+            {
+                cout << "Actividad: " << actividades.getActividad() << endl;
+                cout << "Hora: " << actividades.getHora() << endl;
+                cout << "Lugar: " << actividades.getLugar() << endl;
+                cout << "Descripcion: " << actividades.getDescripcion() << endl;
+                return;
+            }
+        }
+        cout << "no hay viajes asignados para este familia " << endl;
+        return;
+    }
 };
 
 class Viaje
@@ -107,7 +154,6 @@ private:
     string destino;
     string fecha_salida;
     string fecha_devuelta;
-    vector<Actividades> actividades;
 
 public:
     Viaje() {}
@@ -140,45 +186,6 @@ public:
     void setFecha_Devuelta(string &fecha_devuelta)
     {
         this->fecha_devuelta = fecha_devuelta;
-    }
-
-    vector<Actividades> getActividades()
-    {
-        return actividades;
-    }
-
-    void agregaractividad(const Actividades &actividad)
-    {
-        actividades.push_back(actividad);
-    }
-
-    void Crear_actividad(string miembro_familiar, map<string, Viaje> &asignaciones_familia)
-    {
-        string nombre_actividad;
-        string hora_actividad;
-        string lugar_actividad;
-        string describ_actividad;
-
-        cout << "Ingrese el nombre de la actividad: " << endl;
-        cin >> nombre_actividad;
-
-        cout << "Ingrese la hora de la actividad: " << endl;
-        cin >> hora_actividad;
-
-        cout << "Ingrese el lugar de la actividad: " << endl;
-        cin >> lugar_actividad;
-
-        cout << "Ingrese la descripcion de la actividad: " << endl;
-        cin >> describ_actividad;
-
-        auto iterador = asignaciones_familia.find(miembro_familiar);
-        if (iterador == asignaciones_familia.end())
-        {
-            cout << "no hay viajes asignados para este familiar: " << endl;
-            return;
-        }
-
-        iterador->second.agregaractividad(Actividades(nombre_actividad, hora_actividad, lugar_actividad, describ_actividad));
     }
 };
 
@@ -297,16 +304,21 @@ class Interfaz
 private:
     Destino destino;
     Planeacion_viaje planeacion_viaje;
-    Viaje actividad;
     string nombre;
     string miembro_familia;
     string destino_llegada;
     string fecha_llegada;
     string fecha_salida;
-    // Planeacion_viaje actividad;
     string destino_bucar;
+    string nombre_actividad;
+    string hora_actividad;
+    string lugar_actividad;
+    string describ_actividad;
+    // Planeacion_viaje actividad;
     set<Destino> destinos;
     map<string, Viaje> asignaciones_familia;
+    Actividades actividades;
+    map<string, Actividades> asignaciones_actividad;
     Viaje viaje;
     int opcion;
     int shutdown = 0;
@@ -395,13 +407,36 @@ public:
                 destino_especifico(destino_bucar, asignaciones_familia);
                 break;
             case 6:
-                cout << "Ingresar el familiar: " << endl;
-                cin >> miembro_familia;
-                actividad.Crear_actividad(miembro_familia, asignaciones_familia);
+                cin.ignore();
+                cout << "Ingrese el nombre del familiar: " << endl;
+                getline(cin, miembro_familia);
+
+                cout << "Ingrese el nombre de la actividad: " << endl;
+                getline(cin, nombre_actividad);
+
+                cout << "Ingrese la hora de la actividad: " << endl;
+                getline(cin, hora_actividad);
+
+                cout << "Ingrese el lugar de la actividad: " << endl;
+                getline(cin, lugar_actividad);
+
+                cout << "Ingrese la descripcion de la actividad: " << endl;
+                getline(cin, describ_actividad);
+
+                actividades.setActividad(nombre_actividad);
+                actividades.setHora(hora_actividad);
+                actividades.setLugar(lugar_actividad);
+                actividades.setDescripcion(describ_actividad);
+
+                actividades.Crear_actividad(miembro_familia, actividades, asignaciones_actividad);
                 break;
 
             case 7:
-                cout << "Gracias por usar el sistema" << endl;
+                cout << "¿De quien quiere saber las actividades?" << endl;
+                cin >> miembro_familia;
+
+                actividades.mostrar_actividades(miembro_familia, asignaciones_actividad);
+
                 break;
 
             default:
