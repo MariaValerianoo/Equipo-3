@@ -255,6 +255,16 @@ class TioSobrio{
         }
 
     }
+    void verActividadesGenerales(){
+
+        queue <string> aux = actividadesGenerales;
+        cout << "Fechas generales: " << endl;
+        while(!aux.empty()){
+            cout << aux.front() << endl;
+            aux.pop();
+        }
+
+    }
 
     void verViajesMiembro(string miembro){
 
