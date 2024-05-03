@@ -133,7 +133,7 @@ public:
         auto iterador = asignaciones_actividad.find(miembro_familiar);
         if (iterador != asignaciones_actividad.end())
         {
-            cout << "Las actividades de " << miembro_familiar << "son: " << endl;
+            cout << "Las actividades de " << miembro_familiar << " son: " << endl;
             for (const auto &actividades : iterador->second.getActividades())
             {
                 cout << "Actividad: " << actividades.getActividad() << endl;
